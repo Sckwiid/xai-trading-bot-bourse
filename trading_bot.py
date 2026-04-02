@@ -51,11 +51,14 @@ from hyperliquid.utils import constants
 XAI_API_URL = "https://api.x.ai/v1/chat/completions"
 XAI_MODEL = "grok-4.20-0309-reasoning"
 SCHEDULE_TZ = ZoneInfo("America/New_York")
+HL_DEX = "xyz"
 XAI_RETRYABLE_STATUS_CODES = {429, 500, 502, 503, 504}
 TRADING_LOG_PATH = Path("trading_bot.log")
 NAV_HISTORY_PATH = Path("nav_history.csv")
 LATEST_PROMPT_PATH = Path("latest_prompt.txt")
 LATEST_RESPONSE_PATH = Path("latest_response.txt")
+DECISIONS_HISTORY_PATH = Path("decisions_history.jsonl")
+REQUIRE_FULL_SIGNAL_COVERAGE = True
 MARKET_NEWS_TICKERS = [
     "NDX",
     "TSLA",
@@ -92,6 +95,7 @@ FIELD_LABELS = [
     "COIN",
     "LEVERAGE",
     "SIGNAL",
+    "HOLD_REASON",
     "QUANTITY",
     "STOP LOSS",
 ]
@@ -99,7 +103,7 @@ FIELD_LABELS_PATTERN = "|".join(re.escape(label) for label in FIELD_LABELS)
 
 # Détecte une ligne d'en-tête de type "XYZ:MSFT", "ABC:TSLA", etc.
 BLOCK_HEADER_RE = re.compile(
-    r"(?m)^\s*[A-Za-z][A-Za-z0-9_-]*\s*:\s*[A-Za-z0-9._/\-]+\s*$"
+    r"(?m)^\s*[A-Z][A-Z0-9_-]*\s*:\s*\[?[A-Za-z0-9._/\-]+\]?\s*$"
 )
 
 
@@ -113,6 +117,8 @@ class TradeSignal:
     profit_target: Optional[float]
     confidence: Optional[float]
     is_add: Optional[bool]
+    hold_reason: Optional[str]
+    justification: Optional[str]
 
 
 def setup_logging(log_level: str) -> None:
@@ -152,6 +158,81 @@ def read_text_file(path: Path) -> str:
 
 def write_text_file(path: Path, content: str) -> None:
     path.write_text(content, encoding="utf-8")
+
+
+def get_expected_exchange_coins() -> list[str]:
+    expected: list[str] = []
+    for ticker in MARKET_NEWS_TICKERS:
+        mapped = PROMPT_TO_EXCHANGE_COIN.get(ticker, f"xyz:{ticker}")
+        expected.append(mapped)
+    return expected
+
+
+def inject_runtime_markers(base_user_prompt: str) -> str:
+    now_et = datetime.now(SCHEDULE_TZ).strftime("%A, %B %d, %Y %I:%M %p %Z")
+    watchlist_text = ", ".join(MARKET_NEWS_TICKERS)
+    rendered = base_user_prompt
+    rendered = rendered.replace("{{NOW_ET}}", now_et)
+    rendered = rendered.replace("{{WATCHLIST}}", watchlist_text)
+    return rendered
+
+
+def get_current_nav(exchange: Exchange, wallet_address: str) -> Optional[float]:
+    try:
+        user_state = exchange.info.user_state(wallet_address, dex=HL_DEX)
+    except Exception:
+        logging.exception("Impossible de récupérer le NAV (user_state).")
+        return None
+
+    if not isinstance(user_state, dict):
+        return None
+    margin_summary = user_state.get("marginSummary", {})
+    cross_summary = user_state.get("crossMarginSummary", {})
+    nav_value = parse_float(str(margin_summary.get("accountValue", "")))
+    if nav_value is None:
+        nav_value = parse_float(str(cross_summary.get("accountValue", "")))
+    return nav_value
+
+
+def append_nav_history(nav_value: Optional[float], timestamp: datetime) -> None:
+    if nav_value is None:
+        logging.warning("NAV indisponible, nav_history.csv non mis à jour.")
+        return
+
+    file_exists = NAV_HISTORY_PATH.exists()
+    with NAV_HISTORY_PATH.open("a", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        if not file_exists:
+            writer.writerow(["timestamp_et", "nav"])
+        writer.writerow([timestamp.isoformat(), nav_value])
+
+
+def append_decisions_history(
+    signals: list[dict[str, Any]],
+    timestamp: datetime,
+    wallet_address: str,
+) -> None:
+    summary: dict[str, int] = {}
+    for signal in signals:
+        action = str(signal.get("signal", "unknown")).strip().lower() or "unknown"
+        summary[action] = summary.get(action, 0) + 1
+
+    record = {
+        "timestamp_et": timestamp.isoformat(),
+        "wallet": wallet_address,
+        "dex": HL_DEX,
+        "signal_count": len(signals),
+        "summary": summary,
+        "signals": signals,
+    }
+    with DECISIONS_HISTORY_PATH.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(record, ensure_ascii=False))
+        f.write("\n")
+
+
+def normalize_signal_coin_for_coverage(raw_coin: str) -> str:
+    mapped = PROMPT_TO_EXCHANGE_COIN.get(raw_coin.upper(), raw_coin)
+    return normalize_coin(mapped)
 
 
 def _compact_news_title(title: str) -> str:
@@ -233,7 +314,7 @@ def extract_watchlist_from_prompt(prompt_text: str) -> set[str]:
 
 
 def build_live_account_context(exchange: Exchange, wallet_address: str, base_user_prompt: str) -> str:
-    user_state = exchange.info.user_state(wallet_address)
+    user_state = exchange.info.user_state(wallet_address, dex=HL_DEX)
     positions_raw = user_state.get("assetPositions", []) if isinstance(user_state, dict) else []
 
     positions: list[dict[str, Any]] = []
@@ -275,7 +356,7 @@ def build_live_account_context(exchange: Exchange, wallet_address: str, base_use
         watchlist.add(coin)
         watchlist.add(normalize_coin(coin))
 
-    mids_raw = exchange.info.all_mids()
+    mids_raw = exchange.info.all_mids(dex=HL_DEX)
     mids: dict[str, Any] = mids_raw if isinstance(mids_raw, dict) else {}
 
     norm_watchlist = {normalize_coin(sym) for sym in watchlist if sym}
@@ -450,8 +531,10 @@ def call_xai(
 
 def normalize_coin(raw_coin: str) -> str:
     coin = raw_coin.strip()
+    coin = coin.strip("[]")
     if ":" in coin:
         coin = coin.split(":")[-1]
+    coin = coin.strip("[]")
     coin = coin.strip().upper()
     # Garde un format prudent pour le ticker Hyperliquid.
     coin = re.sub(r"[^A-Z0-9._-]", "", coin)
@@ -515,6 +598,17 @@ def parse_bool(value: Optional[str]) -> Optional[bool]:
     return None
 
 
+def parse_text(value: Optional[str]) -> Optional[str]:
+    if value is None:
+        return None
+    text = value.strip()
+    if not text:
+        return None
+    if text.lower() in {"none", "null", "n/a", "na", "nan"}:
+        return None
+    return text
+
+
 def normalize_signal(raw_signal: Optional[str], is_add: Optional[bool]) -> str:
     if raw_signal is None:
         return "add" if is_add else "hold"
@@ -550,7 +644,10 @@ def extract_header_coin(block: str) -> Optional[str]:
         stripped = line.strip()
         if not stripped:
             continue
-        match = re.match(r"^[A-Za-z][A-Za-z0-9_-]*\s*:\s*([A-Za-z0-9._/\-]+)\s*$", stripped)
+        match = re.match(
+            r"^[A-Z][A-Z0-9_-]*\s*:\s*(\[?[A-Za-z0-9._/\-]+\]?)\s*$",
+            stripped,
+        )
         if match:
             return normalize_coin(match.group(1))
         # Dès qu'on entre dans une zone de labels, inutile de continuer.
@@ -578,6 +675,7 @@ def split_blocks(raw_text: str) -> list[str]:
 def parse_signals(raw_text: str) -> list[dict[str, Any]]:
     parsed_signals: list[dict[str, Any]] = []
     blocks = split_blocks(raw_text)
+    seen_coins: set[str] = set()
 
     for block in blocks:
         coin_raw = extract_field(block, "COIN")
@@ -594,7 +692,11 @@ def parse_signals(raw_text: str) -> list[dict[str, Any]]:
         profit_target = parse_float(extract_field(block, "PROFIT TARGET"))
         confidence = parse_float(extract_field(block, "CONFIDENCE"))
         is_add = parse_bool(extract_field(block, "IS ADD"))
+        hold_reason = parse_text(extract_field(block, "HOLD_REASON"))
+        justification = parse_text(extract_field(block, "JUSTIFICATION"))
         signal = normalize_signal(signal_raw, is_add)
+        if signal == "hold" and not hold_reason:
+            hold_reason = justification or "unspecified_by_model"
 
         signal_obj = TradeSignal(
             coin=coin,
@@ -605,7 +707,14 @@ def parse_signals(raw_text: str) -> list[dict[str, Any]]:
             profit_target=profit_target,
             confidence=confidence,
             is_add=is_add,
+            hold_reason=hold_reason,
+            justification=justification,
         )
+        normalized_coin = normalize_coin(signal_obj.coin)
+        if normalized_coin in seen_coins:
+            logging.warning("Bloc dupliqué ignoré pour le coin %s.", normalized_coin)
+            continue
+        seen_coins.add(normalized_coin)
         parsed_signals.append(
             {
                 "coin": signal_obj.coin,
@@ -616,10 +725,23 @@ def parse_signals(raw_text: str) -> list[dict[str, Any]]:
                 "profit_target": signal_obj.profit_target,
                 "confidence": signal_obj.confidence,
                 "is_add": signal_obj.is_add,
+                "hold_reason": signal_obj.hold_reason,
+                "justification": signal_obj.justification,
             }
         )
 
     return parsed_signals
+
+
+def validate_signal_coverage(signals: list[dict[str, Any]]) -> tuple[set[str], set[str]]:
+    expected_norm = {normalize_coin(coin) for coin in get_expected_exchange_coins()}
+    got_norm = {
+        normalize_signal_coin_for_coverage(str(signal.get("coin", "")))
+        for signal in signals
+        if signal.get("coin")
+    }
+    missing = expected_norm - got_norm
+    return expected_norm, missing
 
 
 def init_hyperliquid_testnet(wallet_address: str, private_key: str) -> Exchange:
@@ -692,7 +814,7 @@ def get_open_position_norm_coins(exchange: Exchange) -> set[str]:
         return set()
 
     try:
-        state = exchange.info.user_state(str(account_address))
+        state = exchange.info.user_state(str(account_address), dex=HL_DEX)
     except Exception:
         logging.exception("Impossible de lire les positions ouvertes pour %s.", account_address)
         return set()
@@ -720,6 +842,8 @@ def execute_signals(
         coin = str(signal.get("coin", "")).strip().upper()
         quantity = signal.get("quantity")
         leverage = signal.get("leverage")
+        hold_reason = parse_text(str(signal.get("hold_reason", "")).strip())
+        justification = parse_text(str(signal.get("justification", "")).strip())
         logging.info("Signal reçu: %s", signal)
 
         if not coin:
@@ -760,11 +884,18 @@ def execute_signals(
                 log_order_response("market_close", exchange_coin, order_resp)
 
             elif action == "hold":
+                reason = hold_reason or justification or "unspecified_by_model"
                 if normalize_coin(exchange_coin) in open_position_norm_coins:
-                    logging.info("Aucune action pour %s (signal hold sur position existante).", exchange_coin)
+                    logging.info(
+                        "Aucune action pour %s (signal hold sur position existante). Raison: %s",
+                        exchange_coin,
+                        reason,
+                    )
                 else:
                     logging.info(
-                        "Aucune action pour %s (signal hold sans position ouverte).", exchange_coin
+                        "Aucune action pour %s (signal hold sans position ouverte). Raison: %s",
+                        exchange_coin,
+                        reason,
                     )
 
             else:
@@ -792,55 +923,69 @@ def run_cycle(
     wallet_address = require_env("HL_WALLET_ADDRESS")
     private_key = require_env("HL_PRIVATE_KEY")
     exchange = init_hyperliquid_testnet(wallet_address=wallet_address, private_key=private_key)
-
-    market_news_block, missing_news_tickers = fetch_market_news()
-    if market_news_block:
-        logging.info("News marché récupérées pour le prompt (%d lignes).", market_news_block.count("\n") + 1)
-    else:
-        logging.warning("Aucune news marché récupérée via RSS Yahoo Finance.")
-    if missing_news_tickers:
-        logging.warning(
-            "News manquantes pour %d/%d tickers monitorés: %s",
-            len(missing_news_tickers),
-            len(MARKET_NEWS_TICKERS),
-            ", ".join(missing_news_tickers),
-        )
-    else:
-        logging.info("Couverture news complète: %d/%d tickers.", len(MARKET_NEWS_TICKERS), len(MARKET_NEWS_TICKERS))
-
-    system_prompt = read_text_file(system_prompt_path)
-    base_user_prompt = read_text_file(user_prompt_path)
-    base_user_prompt = inject_market_news_into_user_prompt(base_user_prompt, market_news_block)
-
-    user_prompt = base_user_prompt
     try:
-        live_context = build_live_account_context(exchange, wallet_address, base_user_prompt)
-        user_prompt = inject_live_context_into_user_prompt(base_user_prompt, live_context)
-        logging.info("Snapshot live Hyperliquid injecté dans le prompt utilisateur.")
-    except Exception:
-        logging.exception(
-            "Impossible de récupérer le snapshot live Hyperliquid. "
-            "Fallback sur User_prompt.txt brut."
+        market_news_block, missing_news_tickers = fetch_market_news()
+        if market_news_block:
+            logging.info("News marché récupérées pour le prompt (%d lignes).", market_news_block.count("\n") + 1)
+        else:
+            logging.warning("Aucune news marché récupérée via RSS Yahoo Finance.")
+        if missing_news_tickers:
+            logging.warning(
+                "News manquantes pour %d/%d tickers monitorés: %s",
+                len(missing_news_tickers),
+                len(MARKET_NEWS_TICKERS),
+                ", ".join(missing_news_tickers),
+            )
+        else:
+            logging.info("Couverture news complète: %d/%d tickers.", len(MARKET_NEWS_TICKERS), len(MARKET_NEWS_TICKERS))
+
+        system_prompt = read_text_file(system_prompt_path)
+        base_user_prompt = read_text_file(user_prompt_path)
+        base_user_prompt = inject_runtime_markers(base_user_prompt)
+        base_user_prompt = inject_market_news_into_user_prompt(base_user_prompt, market_news_block)
+
+        user_prompt = base_user_prompt
+        try:
+            live_context = build_live_account_context(exchange, wallet_address, base_user_prompt)
+            user_prompt = inject_live_context_into_user_prompt(base_user_prompt, live_context)
+            logging.info("Snapshot live Hyperliquid injecté dans le prompt utilisateur.")
+        except Exception:
+            logging.exception(
+                "Impossible de récupérer le snapshot live Hyperliquid. "
+                "Fallback sur User_prompt.txt brut."
+            )
+
+        write_text_file(LATEST_PROMPT_PATH, user_prompt)
+
+        xai_text = call_xai(
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            api_key=xai_api_key,
+            timeout_sec=xai_timeout_sec,
+            max_retries=xai_max_retries,
+            retry_backoff_sec=xai_retry_backoff_sec,
         )
+        write_text_file(LATEST_RESPONSE_PATH, xai_text)
+        logging.info("Réponse xAI reçue (%d caractères).", len(xai_text))
+        logging.debug("Réponse xAI brute:\n%s", xai_text)
 
-    xai_text = call_xai(
-        system_prompt=system_prompt,
-        user_prompt=user_prompt,
-        api_key=xai_api_key,
-        timeout_sec=xai_timeout_sec,
-        max_retries=xai_max_retries,
-        retry_backoff_sec=xai_retry_backoff_sec,
-    )
-    logging.info("Réponse xAI reçue (%d caractères).", len(xai_text))
-    logging.debug("Réponse xAI brute:\n%s", xai_text)
+        signals = parse_signals(xai_text)
+        if not signals:
+            raise RuntimeError("Aucun signal exploitable trouvé dans la réponse xAI.")
 
-    signals = parse_signals(xai_text)
-    if not signals:
-        logging.warning("Aucun signal exploitable trouvé dans la réponse xAI.")
-        return
+        expected_norm, missing_norm = validate_signal_coverage(signals)
+        if REQUIRE_FULL_SIGNAL_COVERAGE and missing_norm:
+            raise RuntimeError(
+                "Réponse xAI incomplète: "
+                f"{len(missing_norm)}/{len(expected_norm)} tickers manquants ({', '.join(sorted(missing_norm))})."
+            )
 
-    execute_signals(exchange=exchange, signals=signals, max_slippage=max_slippage)
-    logging.info("Cycle de trading terminé.")
+        append_decisions_history(signals, datetime.now(SCHEDULE_TZ), wallet_address)
+        execute_signals(exchange=exchange, signals=signals, max_slippage=max_slippage)
+        logging.info("Cycle de trading terminé.")
+    finally:
+        nav_now = get_current_nav(exchange, wallet_address)
+        append_nav_history(nav_now, datetime.now(SCHEDULE_TZ))
 
 
 def start_scheduler(job_callable: Any) -> None:

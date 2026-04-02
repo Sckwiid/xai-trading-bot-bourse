@@ -1,0 +1,159 @@
+2026-04-02 17:21:44,391 | INFO | Démarrage d'un cycle de trading.
+2026-04-02 17:21:47,444 | INFO | News marché récupérées pour le prompt (13 lignes).
+2026-04-02 17:21:47,445 | INFO | Couverture news complète: 13/13 tickers.
+2026-04-02 17:21:48,182 | INFO | Snapshot live Hyperliquid injecté dans le prompt utilisateur.
+2026-04-02 17:22:06,527 | INFO | Réponse xAI reçue (798 caractères).
+2026-04-02 17:22:06,792 | INFO | Signal reçu: {'coin': 'NDX', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 19500.0, 'profit_target': 21000.0, 'confidence': 0.65, 'is_add': False}
+2026-04-02 17:22:06,793 | INFO | Coin résolu pour exchange: NDX -> xyz:XYZ100
+2026-04-02 17:22:06,793 | INFO | Aucune action pour xyz:XYZ100 (signal hold sans position ouverte).
+2026-04-02 17:22:06,793 | INFO | Cycle de trading terminé.
+2026-04-02 17:42:43,897 | INFO | Démarrage d'un cycle de trading.
+2026-04-02 17:42:46,787 | INFO | News marché récupérées pour le prompt (13 lignes).
+2026-04-02 17:42:46,787 | INFO | Couverture news complète: 13/13 tickers.
+2026-04-02 17:42:47,531 | INFO | Snapshot live Hyperliquid injecté dans le prompt utilisateur.
+2026-04-02 17:43:05,691 | INFO | Réponse xAI reçue (4191 caractères).
+2026-04-02 17:48:11,956 | INFO | Démarrage d'un cycle de trading.
+2026-04-02 17:48:14,906 | INFO | News marché récupérées pour le prompt (13 lignes).
+2026-04-02 17:48:14,906 | INFO | Couverture news complète: 13/13 tickers.
+2026-04-02 17:48:15,623 | INFO | Snapshot live Hyperliquid injecté dans le prompt utilisateur.
+2026-04-02 17:48:39,526 | INFO | Réponse xAI reçue (3500 caractères).
+2026-04-02 17:48:39,852 | INFO | Signal reçu: {'coin': 'NDX', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 19000.0, 'profit_target': 21000.0, 'confidence': 0.55, 'is_add': False}
+2026-04-02 17:48:39,853 | INFO | Coin résolu pour exchange: NDX -> xyz:XYZ100
+2026-04-02 17:48:39,854 | INFO | Aucune action pour xyz:XYZ100 (signal hold sans position ouverte).
+2026-04-02 17:48:39,854 | INFO | Signal reçu: {'coin': 'TSLA', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 220.0, 'profit_target': 350.0, 'confidence': 0.35, 'is_add': False}
+2026-04-02 17:48:39,855 | INFO | Aucune action pour TSLA (signal hold sans position ouverte).
+2026-04-02 17:48:39,855 | INFO | Signal reçu: {'coin': 'NVDA', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 110.0, 'profit_target': 160.0, 'confidence': 0.65, 'is_add': False}
+2026-04-02 17:48:39,855 | INFO | Aucune action pour NVDA (signal hold sans position ouverte).
+2026-04-02 17:48:39,855 | INFO | Signal reçu: {'coin': 'MSFT', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 380.0, 'profit_target': 450.0, 'confidence': 0.7, 'is_add': False}
+2026-04-02 17:48:39,856 | INFO | Aucune action pour MSFT (signal hold sans position ouverte).
+2026-04-02 17:48:39,856 | INFO | Signal reçu: {'coin': 'GOOGL', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 150.0, 'profit_target': 200.0, 'confidence': 0.6, 'is_add': False}
+2026-04-02 17:48:39,857 | INFO | Aucune action pour GOOGL (signal hold sans position ouverte).
+2026-04-02 17:48:39,857 | INFO | Signal reçu: {'coin': 'PLTR', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 35.0, 'profit_target': 60.0, 'confidence': 0.75, 'is_add': False}
+2026-04-02 17:48:39,857 | INFO | Aucune action pour PLTR (signal hold sans position ouverte).
+2026-04-02 17:48:39,857 | INFO | Signal reçu: {'coin': 'AAPL', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 200.0, 'profit_target': 250.0, 'confidence': 0.6, 'is_add': False}
+2026-04-02 17:48:39,858 | INFO | Aucune action pour AAPL (signal hold sans position ouverte).
+2026-04-02 17:48:39,858 | INFO | Signal reçu: {'coin': 'META', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 500.0, 'profit_target': 650.0, 'confidence': 0.65, 'is_add': False}
+2026-04-02 17:48:39,858 | INFO | Aucune action pour META (signal hold sans position ouverte).
+2026-04-02 17:48:39,859 | INFO | Signal reçu: {'coin': 'COIN', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 200.0, 'profit_target': 350.0, 'confidence': 0.45, 'is_add': False}
+2026-04-02 17:48:39,859 | INFO | Aucune action pour COIN (signal hold sans position ouverte).
+2026-04-02 17:48:39,859 | INFO | Signal reçu: {'coin': 'HOOD', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 25.0, 'profit_target': 50.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 17:48:39,860 | INFO | Aucune action pour HOOD (signal hold sans position ouverte).
+2026-04-02 17:48:39,860 | INFO | Signal reçu: {'coin': 'INTC', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 20.0, 'profit_target': 30.0, 'confidence': 0.8, 'is_add': False}
+2026-04-02 17:48:39,860 | INFO | Aucune action pour INTC (signal hold sans position ouverte).
+2026-04-02 17:48:39,860 | INFO | Signal reçu: {'coin': 'ORCL', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 140.0, 'profit_target': 180.0, 'confidence': 0.7, 'is_add': False}
+2026-04-02 17:48:39,861 | INFO | Aucune action pour ORCL (signal hold sans position ouverte).
+2026-04-02 17:48:39,861 | INFO | Signal reçu: {'coin': 'GOLD', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 2800.0, 'profit_target': 3200.0, 'confidence': 0.75, 'is_add': False}
+2026-04-02 17:48:39,861 | INFO | Aucune action pour GOLD (signal hold sans position ouverte).
+2026-04-02 17:48:39,861 | INFO | Cycle de trading terminé.
+2026-04-02 18:08:06,999 | INFO | Démarrage d'un cycle de trading.
+2026-04-02 18:08:09,724 | INFO | News marché récupérées pour le prompt (13 lignes).
+2026-04-02 18:08:09,725 | INFO | Couverture news complète: 13/13 tickers.
+2026-04-02 18:08:10,473 | INFO | Snapshot live Hyperliquid injecté dans le prompt utilisateur.
+2026-04-02 18:08:25,395 | INFO | Réponse xAI reçue (3829 caractères).
+2026-04-02 18:08:25,399 | WARNING | Bloc dupliqué ignoré pour le coin NDX.
+2026-04-02 18:08:25,400 | WARNING | Bloc dupliqué ignoré pour le coin TSLA.
+2026-04-02 18:08:25,400 | WARNING | Bloc dupliqué ignoré pour le coin NVDA.
+2026-04-02 18:08:25,400 | WARNING | Bloc dupliqué ignoré pour le coin MSFT.
+2026-04-02 18:08:25,401 | WARNING | Bloc dupliqué ignoré pour le coin GOOGL.
+2026-04-02 18:08:25,401 | WARNING | Bloc dupliqué ignoré pour le coin PLTR.
+2026-04-02 18:08:25,401 | WARNING | Bloc dupliqué ignoré pour le coin AAPL.
+2026-04-02 18:08:25,401 | WARNING | Bloc dupliqué ignoré pour le coin META.
+2026-04-02 18:08:25,401 | WARNING | Bloc dupliqué ignoré pour le coin COIN.
+2026-04-02 18:08:25,402 | WARNING | Bloc dupliqué ignoré pour le coin HOOD.
+2026-04-02 18:08:25,402 | WARNING | Bloc dupliqué ignoré pour le coin INTC.
+2026-04-02 18:08:25,402 | WARNING | Bloc dupliqué ignoré pour le coin ORCL.
+2026-04-02 18:08:25,402 | WARNING | Bloc dupliqué ignoré pour le coin GOLD.
+2026-04-02 18:08:25,657 | INFO | Signal reçu: {'coin': 'NDX', 'signal': 'hold', 'quantity': None, 'leverage': None, 'stop_loss': None, 'profit_target': 0.0, 'confidence': 0.45, 'is_add': False}
+2026-04-02 18:08:25,657 | INFO | Coin résolu pour exchange: NDX -> xyz:XYZ100
+2026-04-02 18:08:25,658 | INFO | Aucune action pour xyz:XYZ100 (signal hold sans position ouverte).
+2026-04-02 18:08:25,658 | INFO | Signal reçu: {'coin': 'TSLA', 'signal': 'hold', 'quantity': None, 'leverage': None, 'stop_loss': None, 'profit_target': 0.0, 'confidence': 0.3, 'is_add': False}
+2026-04-02 18:08:25,658 | INFO | Aucune action pour TSLA (signal hold sans position ouverte).
+2026-04-02 18:08:25,658 | INFO | Signal reçu: {'coin': 'NVDA', 'signal': 'hold', 'quantity': None, 'leverage': None, 'stop_loss': None, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:08:25,659 | INFO | Aucune action pour NVDA (signal hold sans position ouverte).
+2026-04-02 18:08:25,659 | INFO | Signal reçu: {'coin': 'MSFT', 'signal': 'hold', 'quantity': None, 'leverage': None, 'stop_loss': None, 'profit_target': 0.0, 'confidence': 0.55, 'is_add': False}
+2026-04-02 18:08:25,659 | INFO | Aucune action pour MSFT (signal hold sans position ouverte).
+2026-04-02 18:08:25,659 | INFO | Signal reçu: {'coin': 'GOOGL', 'signal': 'hold', 'quantity': None, 'leverage': None, 'stop_loss': None, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:08:25,661 | INFO | Aucune action pour GOOGL (signal hold sans position ouverte).
+2026-04-02 18:08:25,661 | INFO | Signal reçu: {'coin': 'PLTR', 'signal': 'hold', 'quantity': None, 'leverage': None, 'stop_loss': None, 'profit_target': 0.0, 'confidence': 0.6, 'is_add': False}
+2026-04-02 18:08:25,661 | INFO | Aucune action pour PLTR (signal hold sans position ouverte).
+2026-04-02 18:08:25,661 | INFO | Signal reçu: {'coin': 'AAPL', 'signal': 'hold', 'quantity': None, 'leverage': None, 'stop_loss': None, 'profit_target': 0.0, 'confidence': 0.4, 'is_add': False}
+2026-04-02 18:08:25,662 | INFO | Aucune action pour AAPL (signal hold sans position ouverte).
+2026-04-02 18:08:25,662 | INFO | Signal reçu: {'coin': 'META', 'signal': 'hold', 'quantity': None, 'leverage': None, 'stop_loss': None, 'profit_target': 0.0, 'confidence': 0.45, 'is_add': False}
+2026-04-02 18:08:25,662 | INFO | Aucune action pour META (signal hold sans position ouverte).
+2026-04-02 18:08:25,662 | INFO | Signal reçu: {'coin': 'COIN', 'signal': 'hold', 'quantity': None, 'leverage': None, 'stop_loss': None, 'profit_target': 0.0, 'confidence': 0.35, 'is_add': False}
+2026-04-02 18:08:25,663 | INFO | Aucune action pour COIN (signal hold sans position ouverte).
+2026-04-02 18:08:25,663 | INFO | Signal reçu: {'coin': 'HOOD', 'signal': 'hold', 'quantity': None, 'leverage': None, 'stop_loss': None, 'profit_target': 0.0, 'confidence': 0.4, 'is_add': False}
+2026-04-02 18:08:25,663 | INFO | Aucune action pour HOOD (signal hold sans position ouverte).
+2026-04-02 18:08:25,663 | INFO | Signal reçu: {'coin': 'INTC', 'signal': 'hold', 'quantity': None, 'leverage': None, 'stop_loss': None, 'profit_target': 0.0, 'confidence': 0.35, 'is_add': False}
+2026-04-02 18:08:25,664 | INFO | Aucune action pour INTC (signal hold sans position ouverte).
+2026-04-02 18:08:25,664 | INFO | Signal reçu: {'coin': 'ORCL', 'signal': 'hold', 'quantity': None, 'leverage': None, 'stop_loss': None, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:08:25,664 | INFO | Aucune action pour ORCL (signal hold sans position ouverte).
+2026-04-02 18:08:25,664 | INFO | Signal reçu: {'coin': 'GOLD', 'signal': 'hold', 'quantity': None, 'leverage': None, 'stop_loss': None, 'profit_target': 0.0, 'confidence': 0.65, 'is_add': False}
+2026-04-02 18:08:25,664 | INFO | Aucune action pour GOLD (signal hold sans position ouverte).
+2026-04-02 18:08:25,665 | INFO | Cycle de trading terminé.
+2026-04-02 18:13:58,306 | INFO | Démarrage d'un cycle de trading.
+2026-04-02 18:14:01,312 | INFO | News marché récupérées pour le prompt (13 lignes).
+2026-04-02 18:14:01,312 | INFO | Couverture news complète: 13/13 tickers.
+2026-04-02 18:14:01,862 | INFO | Snapshot live Hyperliquid injecté dans le prompt utilisateur.
+2026-04-02 18:14:26,428 | INFO | Réponse xAI reçue (3512 caractères).
+2026-04-02 18:14:26,689 | INFO | Signal reçu: {'coin': 'NDX', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:14:26,690 | INFO | Coin résolu pour exchange: NDX -> xyz:XYZ100
+2026-04-02 18:14:26,690 | INFO | Aucune action pour xyz:XYZ100 (signal hold sans position ouverte).
+2026-04-02 18:14:26,691 | INFO | Signal reçu: {'coin': 'TSLA', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:14:26,691 | INFO | Aucune action pour TSLA (signal hold sans position ouverte).
+2026-04-02 18:14:26,691 | INFO | Signal reçu: {'coin': 'NVDA', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:14:26,692 | INFO | Aucune action pour NVDA (signal hold sans position ouverte).
+2026-04-02 18:14:26,692 | INFO | Signal reçu: {'coin': 'MSFT', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:14:26,693 | INFO | Aucune action pour MSFT (signal hold sans position ouverte).
+2026-04-02 18:14:26,693 | INFO | Signal reçu: {'coin': 'GOOGL', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:14:26,694 | INFO | Aucune action pour GOOGL (signal hold sans position ouverte).
+2026-04-02 18:14:26,694 | INFO | Signal reçu: {'coin': 'PLTR', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:14:26,694 | INFO | Aucune action pour PLTR (signal hold sans position ouverte).
+2026-04-02 18:14:26,694 | INFO | Signal reçu: {'coin': 'AAPL', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:14:26,695 | INFO | Aucune action pour AAPL (signal hold sans position ouverte).
+2026-04-02 18:14:26,695 | INFO | Signal reçu: {'coin': 'META', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.4, 'is_add': False}
+2026-04-02 18:14:26,695 | INFO | Aucune action pour META (signal hold sans position ouverte).
+2026-04-02 18:14:26,695 | INFO | Signal reçu: {'coin': 'COIN', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:14:26,695 | INFO | Aucune action pour COIN (signal hold sans position ouverte).
+2026-04-02 18:14:26,696 | INFO | Signal reçu: {'coin': 'HOOD', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:14:26,696 | INFO | Aucune action pour HOOD (signal hold sans position ouverte).
+2026-04-02 18:14:26,696 | INFO | Signal reçu: {'coin': 'INTC', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:14:26,697 | INFO | Aucune action pour INTC (signal hold sans position ouverte).
+2026-04-02 18:14:26,697 | INFO | Signal reçu: {'coin': 'ORCL', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:14:26,697 | INFO | Aucune action pour ORCL (signal hold sans position ouverte).
+2026-04-02 18:14:26,697 | INFO | Signal reçu: {'coin': 'GOLD', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False}
+2026-04-02 18:14:26,698 | INFO | Aucune action pour GOLD (signal hold sans position ouverte).
+2026-04-02 18:14:26,698 | INFO | Cycle de trading terminé.
+2026-04-02 18:38:13,916 | INFO | Démarrage d'un cycle de trading.
+2026-04-02 18:38:16,561 | INFO | News marché récupérées pour le prompt (13 lignes).
+2026-04-02 18:38:16,561 | INFO | Couverture news complète: 13/13 tickers.
+2026-04-02 18:38:17,294 | INFO | Snapshot live Hyperliquid injecté dans le prompt utilisateur.
+2026-04-02 18:38:27,112 | INFO | Réponse xAI reçue (3093 caractères).
+2026-04-02 18:38:27,375 | INFO | Signal reçu: {'coin': 'NDX', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False, 'hold_reason': 'nav_zero', 'justification': 'Zero NAV and mixed Iran/AI news'}
+2026-04-02 18:38:27,376 | INFO | Coin résolu pour exchange: NDX -> xyz:XYZ100
+2026-04-02 18:38:27,377 | INFO | Aucune action pour xyz:XYZ100 (signal hold sans position ouverte). Raison: nav_zero
+2026-04-02 18:38:27,377 | INFO | Signal reçu: {'coin': 'TSLA', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False, 'hold_reason': 'nav_zero', 'justification': 'Zero NAV and mixed Iran/AI news'}
+2026-04-02 18:38:27,378 | INFO | Aucune action pour TSLA (signal hold sans position ouverte). Raison: nav_zero
+2026-04-02 18:38:27,378 | INFO | Signal reçu: {'coin': 'NVDA', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False, 'hold_reason': 'nav_zero', 'justification': 'Zero NAV and mixed Iran/AI news'}
+2026-04-02 18:38:27,379 | INFO | Aucune action pour NVDA (signal hold sans position ouverte). Raison: nav_zero
+2026-04-02 18:38:27,379 | INFO | Signal reçu: {'coin': 'MSFT', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False, 'hold_reason': 'nav_zero', 'justification': 'Zero NAV and mixed Iran/AI news'}
+2026-04-02 18:38:27,381 | INFO | Aucune action pour MSFT (signal hold sans position ouverte). Raison: nav_zero
+2026-04-02 18:38:27,381 | INFO | Signal reçu: {'coin': 'GOOGL', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False, 'hold_reason': 'nav_zero', 'justification': 'Zero NAV and mixed Iran/AI news'}
+2026-04-02 18:38:27,384 | INFO | Aucune action pour GOOGL (signal hold sans position ouverte). Raison: nav_zero
+2026-04-02 18:38:27,384 | INFO | Signal reçu: {'coin': 'PLTR', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False, 'hold_reason': 'nav_zero', 'justification': 'Zero NAV and mixed Iran/AI news'}
+2026-04-02 18:38:27,385 | INFO | Aucune action pour PLTR (signal hold sans position ouverte). Raison: nav_zero
+2026-04-02 18:38:27,385 | INFO | Signal reçu: {'coin': 'AAPL', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False, 'hold_reason': 'nav_zero', 'justification': 'Zero NAV and mixed Iran/AI news'}
+2026-04-02 18:38:27,385 | INFO | Aucune action pour AAPL (signal hold sans position ouverte). Raison: nav_zero
+2026-04-02 18:38:27,385 | INFO | Signal reçu: {'coin': 'META', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False, 'hold_reason': 'nav_zero', 'justification': 'Zero NAV and mixed Iran/AI news'}
+2026-04-02 18:38:27,385 | INFO | Aucune action pour META (signal hold sans position ouverte). Raison: nav_zero
+2026-04-02 18:38:27,385 | INFO | Signal reçu: {'coin': 'COIN', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False, 'hold_reason': 'nav_zero', 'justification': 'Zero NAV and mixed Iran/AI news'}
+2026-04-02 18:38:27,386 | INFO | Aucune action pour COIN (signal hold sans position ouverte). Raison: nav_zero
+2026-04-02 18:38:27,386 | INFO | Signal reçu: {'coin': 'HOOD', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False, 'hold_reason': 'nav_zero', 'justification': 'Zero NAV and mixed Iran/AI news'}
+2026-04-02 18:38:27,386 | INFO | Aucune action pour HOOD (signal hold sans position ouverte). Raison: nav_zero
+2026-04-02 18:38:27,386 | INFO | Signal reçu: {'coin': 'INTC', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False, 'hold_reason': 'nav_zero', 'justification': 'Zero NAV and mixed Iran/AI news'}
+2026-04-02 18:38:27,386 | INFO | Aucune action pour INTC (signal hold sans position ouverte). Raison: nav_zero
+2026-04-02 18:38:27,386 | INFO | Signal reçu: {'coin': 'ORCL', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False, 'hold_reason': 'nav_zero', 'justification': 'Zero NAV and mixed Iran/AI news'}
+2026-04-02 18:38:27,387 | INFO | Aucune action pour ORCL (signal hold sans position ouverte). Raison: nav_zero
+2026-04-02 18:38:27,387 | INFO | Signal reçu: {'coin': 'GOLD', 'signal': 'hold', 'quantity': 0.0, 'leverage': 1, 'stop_loss': 0.0, 'profit_target': 0.0, 'confidence': 0.5, 'is_add': False, 'hold_reason': 'nav_zero', 'justification': 'Zero NAV and mixed Iran/AI news'}
+2026-04-02 18:38:27,387 | INFO | Aucune action pour GOLD (signal hold sans position ouverte). Raison: nav_zero
+2026-04-02 18:38:27,387 | INFO | Cycle de trading terminé.

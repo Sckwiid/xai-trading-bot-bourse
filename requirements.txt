@@ -2,5 +2,8 @@ apscheduler
 eth-account
 feedparser
 hyperliquid-python-sdk
+pandas
+plotly
 requests
+streamlit
 tzdata

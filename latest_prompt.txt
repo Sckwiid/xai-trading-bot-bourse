@@ -1,0 +1,51 @@
+[NDX] : "TSX set to open lower after Trump signals escalation in Iran conflict" | "Roper Technologies schedules first quarter 2026 financial results conference call" | "The Nasdaq Has Entered a Correction: Here Are 2 Stocks That Are Can't-Miss Buys"
+[TSLA] : "Tesla's First-Quarter Deliveries Miss Views as Wedbush Flags Tough Demand Backdrop" | "Tesla Keeps Momentum Going in China" | "Dow falls as oil surges on Trump speech to 'hit Iran extremely hard'"
+[NVDA] : "Disney's OpenAI Investment Is Over. Here's Where the Company Is Focusing Its Efforts in 2026." | "1 Multibagger Investment Opportunity I'm Eyeing in April" | "Why XRP Is Falling Today"
+[MSFT] : "Microsoft building its own high-powered AI models as it looks to slash dependence on OpenAI" | "Top Midday Stories: Iran, Oman Drafting Hormuz Strait Traffic Protocol; Blue Owl Caps Redemptions at 5% for Two Private Credit Funds" | "’You can’t vibe code’ an AI replacement for mission-critical software: analyst"
+[GOOGL] : "'Buy The Pullback' In Memory Chip Stocks, Analyst Says" | "Can Qualcomm's Snapdragon Innovations for Wearables Drive Growth?" | "Eberly & Associates Officially Rebrands to Pape-Dawson"
+[PLTR] : "UBS has a message for Palantir investors" | "Is Palantir Actually Undervalued? This Key Metric Says It Is" | "Can Multi-Domain ISR Fuel ONDS' Growth Engine After World View Buyout?"
+[AAPL] : "The Epic 50-Year Story of Apple, Told Through the WSJ Archive" | "Top Midday Stories: Iran, Oman Drafting Hormuz Strait Traffic Protocol; Blue Owl Caps Redemptions at 5% for Two Private Credit Funds" | "Can Qualcomm's Snapdragon Innovations for Wearables Drive Growth?"
+[META] : "March Layoff Announcements Rise Sequentially as Companies Prioritize AI Investments" | "Can INTC's Advancements in AI Inference Bolster Its Market Position?" | "Meta Platforms Price Target Trimmed by Wells Fargo"
+[COIN] : "Charles Schwab, Interactive Brokers Face Solid Trading Volumes, BofA Says" | "Coinbase locks in conditional approval to become a bank" | "Coinbase Extends DeFi Reach As Valuation Concerns Meet New Use Cases"
+[HOOD] : "Charles Schwab, Interactive Brokers Face Solid Trading Volumes, BofA Says" | "Bitcoin tumbles, crypto momentum fades as Trump extends Iran timeline" | "A Look At Robinhood Markets (HOOD) Valuation After SpaceX IPO Allocation Concerns And Softer Crypto Trading"
+[INTC] : "Disney's OpenAI Investment Is Over. Here's Where the Company Is Focusing Its Efforts in 2026." | "1 Multibagger Investment Opportunity I'm Eyeing in April" | "Why XRP Is Falling Today"
+[ORCL] : "’You can’t vibe code’ an AI replacement for mission-critical software: analyst" | "March Layoff Announcements Rise Sequentially as Companies Prioritize AI Investments" | "3 Reasons to Hold Microsoft Stock Despite 28.6% Drop in 6 Months"
+[GOLD] : "Assessing Osisko Development’s Valuation After 2025 Results Show Higher Sales And A Deeper Net Loss" | "Gold Slides as Trump Gives Mixed Signals on Iran War Resolution" | "Is Resolute Mining’s (ASX:RSG) Guinea JV Plan a Strategic Expansion or a Dilution of Focus?"
+
+MARKET CONTEXT
+Current time: Thursday, April 02, 2026 12:38 PM EDT
+
+TASK
+- Analyze the provided news and live account snapshot.
+- Produce exactly one decision block per ticker in the watchlist.
+- Keep the watchlist order.
+
+DECISION GUIDELINES
+- If a ticker has no clear edge from the provided data, use `hold`.
+- For `hold`, set numeric defaults consistently (for example quantity 0, leverage 1, risk 0).
+- If `hold`, set `HOLD_REASON` with a short explicit cause (example: `no_clear_edge`, `nav_zero`, `missing_price_data`, `risk_too_high`).
+- For `buy_to_enter`, provide a concrete invalidation condition plus non-zero quantity.
+- For `sell`, use it only if a thesis is clearly broken or risk regime has deteriorated.
+
+FORMAT QUALITY RULES
+- Every numeric field must contain a number.
+- Do not leave fields empty.
+- Do not output `None`, `null`, or placeholders.
+- Use plain tickers (no brackets).
+- `COIN` must use `xyz:TICKER`.
+
+WATCHLIST TO PROCESS
+NDX, TSLA, NVDA, MSFT, GOOGL, PLTR, AAPL, META, COIN, HOOD, INTC, ORCL, GOLD
+
+LIVE ACCOUNT SNAPSHOT (HYPERLIQUID TESTNET)
+Generated at: 2026-04-02 12:38:17 EDT
+Wallet: 0xf10247a7dfbc2488a37eda6f4535dcc73838494e
+
+CURRENT NAV
+0.0
+
+CURRENT PRICES OF TRADEABLE COINS
+{}
+
+CURRENT OPEN POSITIONS
+[]
