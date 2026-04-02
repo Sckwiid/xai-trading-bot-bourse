@@ -1,0 +1,152 @@
+{{MARKET_NEWS}}
+
+CURRENT STATE OF MARKETS
+It is Saturday, December 06, 2025 08:38 am ET. 
+
+1. Raw Data Dashboard (Dog vs. Tail)
+(Market closed; using last regular + late-session data. HL = Hyperliquid perps, contrarian only.)
+NDX (Nasdaq 100)
+    Global Structure: 4h high consolidation / mild uptrend; intraday pinned near recent highs, low realized vol.
+    Local Funding (XYZ100 perp): +0.00125% (tiny positive).
+    Dog vs. Tail: Global Up / Local Slight Long
+
+TSLA
+    Global Structure: 4h: advance from mid‑440s → mid‑450s, consolidating near top of range.
+    Local Funding: +0.00125% (neutral).
+    Dog vs. Tail: Global Up-Consolidation / Local Flat
+
+NVDA
+    Global Structure: 4h: holding upper half of recent range, higher lows, constructive swing.
+    Local Funding: +0.00125% (neutral).
+    Dog vs. Tail: Global Up / Local Flat-Long
+
+MSFT
+    Global Structure: 4h: stair-step higher (sub‑479 → >483), closes near highs.
+    Local Funding: −0.01675% (mild short-lean).
+    Dog vs. Tail: Global Up / Local Slight Short → Bullish divergence.
+
+AAPL
+    Global Structure: 4h: constructive uptrend with shallow pullbacks and higher lows.
+    Local Funding: near neutral.
+    Dog vs. Tail: Global Up / Local Flat-Long
+
+META
+    Global Structure: 4h: trend continuation after breakout, momentum still positive.
+    Local Funding: near neutral.
+    Dog vs. Tail: Global Up / Local Flat
+
+COIN
+    Global Structure: 4h: high-beta trend aligned to crypto risk sentiment.
+    Local Funding: small fluctuations; monitor for crowding.
+    Dog vs. Tail: Global Up-Volatile / Local Mixed
+
+HOOD
+    Global Structure: 4h: cyclical momentum with sensitivity to retail risk appetite.
+    Local Funding: near neutral.
+    Dog vs. Tail: Global Up / Local Flat
+
+INTC
+    Global Structure: 4h: recovery attempt with broader semi-beta tailwind.
+    Local Funding: near neutral.
+    Dog vs. Tail: Global Sideways-Up Bias / Local Flat
+
+ORCL
+    Global Structure: 4h: steady drift with AI/datacenter narrative support.
+    Local Funding: near neutral.
+    Dog vs. Tail: Global Up / Local Flat
+
+GOOGL
+    Global Structure: 4h: recovery to near recent highs (~322), constructive uptrend.
+    Local Funding: +0.00100% (tiny long-lean).
+    Dog vs. Tail: Global Up / Local Slight Long
+
+PLTR
+    Global Structure: 4h: strong multi-day advance (mid‑170s → low‑180s), holding highs.
+    Local Funding: −0.00045% (tiny short-lean).
+    Dog vs. Tail: Global Up / Local Slight Short → Bullish divergence.
+
+GOLD
+    Global Structure: 4h: range-bound with mild bullish bias as real-rate risk stays elevated.
+    Local Funding: near neutral.
+    Dog vs. Tail: Global Defensive-Up / Local Flat
+
+2. Narrative vs. Reality Check
+NVDA / PLTR – AI Infrastructure Deals
+    Narrative: “PLTR–NVDA collaborations, Malaysia 600MW NVDA data center, Chain Reaction OS = big AI infra boost.”
+    State: PRICED IN → mild ABSORPTION
+
+AAPL / META – Mega-cap Platform Strength
+    State: PRICED IN. Momentum remains constructive, but valuations are sensitive to rate repricing.
+
+COIN / HOOD – Risk Appetite Proxy
+    State: EVENT-DRIVEN. Beta remains elevated; use tighter invalidations.
+
+PLTR – Chain Reaction OS, Northslope Expansion
+    State: ABSORPTION. Good news + price holding = seller exhaustion bias (bullish).
+
+MSFT – Dividend / Partner PRs
+    State: PRICED IN. Routine; price action driven by broader AI/NDX flows.
+
+Macro / Fed / NDX
+    Narrative: “Soft landing, mild bear-steepening, Fed cuts coming; December data cluster = big risk.”
+    State: DIVERGENCE / IMPULSE RISK AHEAD. Calm price vs dense upcoming macro → stored volatility.
+
+3. Alpha Setups – Menu of Hypotheses
+NDX
+    Hypothesis A – Buy the High Consolidation (SHORT SWING. Flow. Moderate Edge)
+    Hypothesis B – Fade NDX into Macro Cluster (SCALP. Mean Reversion. Shallow Edge)
+
+NVDA
+    Hypothesis A – Ride Structural Uptrend (SHORT SWING. Flow. Moderate Edge)
+    Hypothesis B – Tactical Short at Range Highs (SCALP. Mean Reversion. Shallow Edge)
+
+MSFT
+    Hypothesis A – Quality AI Compounder Long (SHORT SWING. Flow. Deep Edge)
+    Hypothesis B – Hedge via Short MSFT vs NDX (SHORT SWING. Relative Value. Moderate Edge)
+
+AAPL
+    Hypothesis A – Trend Continuation with Quality Bid (SHORT SWING. Flow. Moderate Edge)
+    Hypothesis B – Tactical Fade near local highs (SCALP. Mean Reversion. Shallow Edge)
+
+META
+    Hypothesis A – Momentum Continuation on platform strength (SHORT SWING. Flow. Moderate Edge)
+    Hypothesis B – Tactical pullback buy only after reclaim (SCALP. Flow. Shallow Edge)
+
+COIN
+    Hypothesis A – High-beta continuation if crypto risk remains bid (SHORT SWING. Flow. Moderate Edge)
+    Hypothesis B – Fast mean reversion short on sentiment exhaustion (SCALP. Mean Reversion. Shallow Edge)
+
+HOOD
+    Hypothesis A – Retail-flow continuation (SHORT SWING. Flow. Moderate Edge)
+    Hypothesis B – Fade failed breakout if market breadth weakens (SCALP. Mean Reversion. Shallow Edge)
+
+INTC
+    Hypothesis A – Recovery continuation with semi support (SHORT SWING. Flow. Moderate Edge)
+    Hypothesis B – Range mean reversion around 4h pivots (SCALP. Mean Reversion. Shallow Edge)
+
+ORCL
+    Hypothesis A – Steady trend continuation on enterprise AI demand (SHORT SWING. Flow. Moderate Edge)
+    Hypothesis B – Tactical fade after extended intraday push (SCALP. Mean Reversion. Shallow Edge)
+
+GOOGL
+    Hypothesis A – Trend Continuation Long (SHORT SWING. Flow. Moderate Edge)
+    Hypothesis B – Tactical Fade at Highs (SCALP. Mean Reversion. Shallow Edge)
+
+PLTR
+    Hypothesis A – Breakout Continuation (SHORT SWING. Flow/Narrative. Moderate Edge)
+    Hypothesis B – Tactical Short After News Rally (SCALP. Mean Reversion. Shallow Edge)
+
+GOLD
+    Hypothesis A – Defensive Long on macro uncertainty (SHORT SWING. Macro/Flow. Moderate Edge)
+    Hypothesis B – Mean reversion short near local range highs (SCALP. Mean Reversion. Shallow Edge)
+
+TSLA
+    Hypothesis A – Bullish Consolidation within Emerging Uptrend (SHORT SWING. Flow. Moderate Edge)
+    Hypothesis B – Relative Weakness Short vs NDX (SHORT SWING. Relative Value. Shallow Edge)
+
+4. Edge Quality Matrix
+    High Conviction: MSFT (Hypothesis A), NVDA (Hypothesis A), NDX (Hypothesis A).
+    Tactical Skews: NVDA (Hypothesis B), GOOGL (Hypothesis B), PLTR (Hypothesis B), NDX (Hypothesis B), TSLA (Hypothesis B), COIN (Hypothesis B), HOOD (Hypothesis B), GOLD (Hypothesis B).
+    No Edge / Avoid: HL-based signals when funding and OI are both inconclusive.
+
+{{LIVE_ACCOUNT_STATE}}
