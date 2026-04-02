@@ -35,7 +35,7 @@ import os
 import re
 import time
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Optional
@@ -58,6 +58,7 @@ NAV_HISTORY_PATH = Path("nav_history.csv")
 LATEST_PROMPT_PATH = Path("latest_prompt.txt")
 LATEST_RESPONSE_PATH = Path("latest_response.txt")
 DECISIONS_HISTORY_PATH = Path("decisions_history.jsonl")
+RETENTION_DAYS = 30
 REQUIRE_FULL_SIGNAL_COVERAGE = True
 MARKET_NEWS_TICKERS = [
     "NDX",
@@ -228,6 +229,112 @@ def append_decisions_history(
     with DECISIONS_HISTORY_PATH.open("a", encoding="utf-8") as f:
         f.write(json.dumps(record, ensure_ascii=False))
         f.write("\n")
+
+
+def prune_nav_history(retention_days: int) -> None:
+    if retention_days <= 0 or not NAV_HISTORY_PATH.exists():
+        return
+    try:
+        rows = NAV_HISTORY_PATH.read_text(encoding="utf-8").splitlines()
+    except Exception:
+        return
+    if not rows:
+        return
+    header = rows[0]
+    kept = [header]
+    cutoff = datetime.now(SCHEDULE_TZ) - timedelta(days=retention_days)
+    for line in rows[1:]:
+        parts = line.split(",", 1)
+        if not parts:
+            continue
+        ts_raw = parts[0].strip()
+        try:
+            ts = datetime.fromisoformat(ts_raw)
+        except Exception:
+            continue
+        if ts.tzinfo is None:
+            ts = ts.replace(tzinfo=SCHEDULE_TZ)
+        if ts >= cutoff:
+            kept.append(line)
+    try:
+        NAV_HISTORY_PATH.write_text("\n".join(kept) + "\n", encoding="utf-8")
+    except Exception:
+        return
+
+
+def prune_decisions_history(retention_days: int) -> None:
+    if retention_days <= 0 or not DECISIONS_HISTORY_PATH.exists():
+        return
+    cutoff = datetime.now(SCHEDULE_TZ) - timedelta(days=retention_days)
+    kept: list[str] = []
+    try:
+        with DECISIONS_HISTORY_PATH.open("r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    payload = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if not isinstance(payload, dict):
+                    continue
+                ts_raw = payload.get("timestamp_et")
+                if not isinstance(ts_raw, str):
+                    continue
+                try:
+                    ts = datetime.fromisoformat(ts_raw)
+                except Exception:
+                    continue
+                if ts.tzinfo is None:
+                    ts = ts.replace(tzinfo=SCHEDULE_TZ)
+                if ts >= cutoff:
+                    kept.append(json.dumps(payload, ensure_ascii=False))
+    except Exception:
+        return
+    try:
+        DECISIONS_HISTORY_PATH.write_text("\n".join(kept) + ("\n" if kept else ""), encoding="utf-8")
+    except Exception:
+        return
+
+
+def _parse_log_timestamp(line: str) -> Optional[datetime]:
+    # Format: "YYYY-MM-DD HH:MM:SS,mmm | LEVEL | message"
+    head = line.split(" | ", 1)[0].strip()
+    if not head:
+        return None
+    try:
+        return datetime.strptime(head, "%Y-%m-%d %H:%M:%S,%f")
+    except Exception:
+        return None
+
+
+def prune_trading_log(retention_days: int) -> None:
+    if retention_days <= 0 or not TRADING_LOG_PATH.exists():
+        return
+    try:
+        lines = TRADING_LOG_PATH.read_text(encoding="utf-8", errors="replace").splitlines()
+    except Exception:
+        return
+    if not lines:
+        return
+    cutoff = datetime.now() - timedelta(days=retention_days)
+    kept: list[str] = []
+    for line in lines:
+        ts = _parse_log_timestamp(line)
+        # Si timestamp illisible, on conserve la ligne.
+        if ts is None or ts >= cutoff:
+            kept.append(line)
+    try:
+        TRADING_LOG_PATH.write_text("\n".join(kept) + ("\n" if kept else ""), encoding="utf-8")
+    except Exception:
+        return
+
+
+def prune_retention_data(retention_days: int) -> None:
+    prune_nav_history(retention_days)
+    prune_decisions_history(retention_days)
+    prune_trading_log(retention_days)
 
 
 def normalize_signal_coin_for_coverage(raw_coin: str) -> str:
@@ -986,6 +1093,7 @@ def run_cycle(
     finally:
         nav_now = get_current_nav(exchange, wallet_address)
         append_nav_history(nav_now, datetime.now(SCHEDULE_TZ))
+        prune_retention_data(RETENTION_DAYS)
 
 
 def start_scheduler(job_callable: Any) -> None:
